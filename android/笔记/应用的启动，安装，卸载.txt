@@ -1,0 +1,60 @@
+启动应用程序：
+	
+	启动一个应用只需要获取对应的包名即可
+
+	PackageManager packageManager = context.getPackageManager();
+	String packageName = packageManager.getPackageName();  // 获取应用的包名
+	// 如果当前的应用中包含有可以启动的Activity，就返回启动这个activity的Intent
+	// 否则就返回null，即当前应用不可以启动
+	Intent intent = packageManager.getLaunchIntentForActivity(packageName);
+	if(intent == null){
+		return;   // 当前应用不可以启动
+	}
+	startActivity(intent);   // 启动这个应用
+
+卸载应用程序：
+	
+	可根据源码中的 PackageInstaller应用中的卸载应用的意图来写
+		源码：
+			<activity android:name=".UninstallerActivity" android:configChanges="orientation|keyboardHidden" android:theme="@style/TallTitleBarTheme">
+			<intent-filter>
+			<action android:name="android.intent.action.VIEW"/>
+			<action android:name="android.intent.action.DELETE"/>
+			<category android:name="android.intent.category.DEFAULT"/>
+			<data android:scheme="package"/>
+			</intent-filter>
+			</activity>
+
+		卸载应用的代码如下：
+			Intent intent = new Intent();
+			intent.setAction("android.intent.action.VIEW");
+			intent.setAction("android.intent.action.DELETE");
+			intent.addCategory("andorid.intent.category.DEFAULT");
+			intent.setData("package:" + (对应应用程序的包名));
+			startActivity(intent);
+
+安装应用程序：
+		可根据源码中的 PackageInstaller应用中的安装应用的意图来写
+
+		源码：
+		<intent-filter>
+		<action android:name="android.intent.action.VIEW"/>
+		<category android:name="android.intent.category.DEFAULT"/>
+		<data android:scheme="content"/>
+		<data android:scheme="file"/>
+		<data android:mimeType="application/vnd.android.package-archive"/>
+		</intent-filter>
+
+		安装应用的代码如下：
+			Intent intent = new Intent();
+			intent.setAction("android.intent.action.VIEW");
+			intent.addCategory("android.intent.category.DEFAULT");
+			intent.setDataAndType(Uri.fromFile("应用程序的apk所对应的File对象"), "application/vnd.android.package-archive");
+			startActivity(intent);
+
+
+
+		
+
+
+

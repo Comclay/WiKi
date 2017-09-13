@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0036)http://ypf3027.iteye.com/blog/812600 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站</title>
+    <meta name="description" content="   Android默认的PopupWindow和EditText的外观是矩形框，看起来不是太好，本示例通过设置布局View的背景和PopupWindowd对象的背景，实现有白色圆角边框的对话框效果和圆角文字编辑框。代码如下（关键部分是背景布局XML）：          对话框弹出效果图：         package com.test;    import android.app.Activi ...">
+    <meta name="keywords" content="Android, XML, OS 圆角PopupWindow对话框和圆角EditText">
+    <link rel="shortcut icon" href="http://ypf3027.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://ypf3027.iteye.com/open_search.xml" title="ITeye">
+    <link href="http://ypf3027.iteye.com/rss" rel="alternate" title="乘长风破万里浪" type="application/rss+xml">
+    <link href="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/blog.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/blue.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/ga.js"></script><script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/application.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/shCoreCommon.js" type="text/javascript"></script>
+<script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/hotkey.js" type="text/javascript"></script>
+  <script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/code_favorites.js" type="text/javascript"></script>
+<script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/weiboshare.js" type="text/javascript"></script>
+  <style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style></head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="http://ypf3027.iteye.com/blog/812600#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="http://ypf3027.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://ypf3027.iteye.com/login">登录</a>
+    <a href="http://ypf3027.iteye.com/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="http://ypf3027.iteye.com/">乘长风破万里浪</a></h1>
+        </div>
+        <div id="fd"></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class="blog_navbar_for"><a href="http://ypf3027.iteye.com/"><strong>博客</strong></a></li>
+            <li><a href="http://ypf3027.iteye.com/weibo">微博</a></li>
+            <li><a href="http://ypf3027.iteye.com/album">相册</a></li>
+            <li><a href="http://ypf3027.iteye.com/link">收藏</a></li>
+            <li><a href="http://ypf3027.iteye.com/blog/guest_book">留言</a></li>
+            <li><a href="http://ypf3027.iteye.com/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="http://ypf3027.iteye.com/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="">
+              <input class="submit_search" type="submit" value="">
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style="display:none">
+  <a href="http://ypf3027.iteye.com/" class="p-author" target="_blank">ypf3027</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站.html">圆角PopupWindow对话框和圆角EditText</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class="blog_categories"><strong>博客分类：</strong> <li><a href="http://ypf3027.iteye.com/category/129643">Android</a></li> </ul>
+        <div class="news_tag"><a href="http://www.iteye.com/blogs/tag/Android">Android</a><a href="http://www.iteye.com/blogs/tag/XML">XML</a><a href="http://www.iteye.com/blogs/tag/OS">OS</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <p>&nbsp;</p>
+<p>Android默认的PopupWindow和EditText的外观是矩形框，看起来不是太好，本示例通过设置布局View的背景和PopupWindowd对象的背景，实现有白色圆角边框的对话框效果和圆角文字编辑框。代码如下（关键部分是背景布局XML）：</p>
+<p>&nbsp;</p>
+<p><br><img alt="" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/b8b4ff2b-5c49-3c3f-a538-a1bec354bb14.png"></p>
+<p>&nbsp;</p>
+<p>对话框弹出效果图：</p>
+<p><br><img alt="" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/70666160-3fe6-3156-90f2-bfa85908c6e6.png"><br>&nbsp;<br>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=package%20com.test%3B%0A%0Aimport%20android.app.Activity%3B%0Aimport%20android.content.Context%3B%0Aimport%20android.os.Bundle%3B%0Aimport%20android.text.InputType%3B%0Aimport%20android.view.Gravity%3B%0Aimport%20android.view.LayoutInflater%3B%0Aimport%20android.view.View%3B%0Aimport%20android.view.View.OnClickListener%3B%0Aimport%20android.widget.Button%3B%0Aimport%20android.widget.EditText%3B%0Aimport%20android.widget.PopupWindow%3B%0Aimport%20android.widget.LinearLayout.LayoutParams%3B%0A%0A%0Apublic%20class%20RoundCorner%20extends%20Activity%20%7B%0A%0A%09Button%20mButton%3B%20%0A%0A%09%40Override%0A%09public%20void%20onCreate(Bundle%20savedInstanceState)%20%7B%0A%09%09super.onCreate(savedInstanceState)%3B%0A%09%09setContentView(R.layout.main)%3B%0A%09%09%0A%09%09%2F%2F%20%E5%AE%9A%E4%B9%89%E6%8C%89%E9%92%AE%0A%09%09mButton%20%3D%20(Button)%20this.findViewById(R.id.Button01)%3B%0A%09%09mButton.setOnClickListener(new%20ClickEvent())%3B%0A%09%09%0A%09%09%2F%2F%20%E4%B8%A4%E4%B8%AA%E5%9C%86%E8%A7%92%E6%96%87%E5%AD%97%E7%BC%96%E8%BE%91%E6%A1%86%0A%09%09EditText%20et1%20%3D%20(EditText)%20this.findViewById(R.id.roundedtext1)%3B%0A%09%09EditText%20et2%20%3D%20(EditText)%20this.findViewById(R.id.roundedtext2)%3B%0A%09%09et1.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_CORRECT)%3B%0A%09%09et2.setInputType(InputType.TYPE_NULL)%3B%20%2F%2F%E4%B8%8D%E6%98%BE%E7%A4%BA%E8%BD%AF%E9%94%AE%E7%9B%98%0A%09%09%0A%09%7D%0A%0A%09%2F%2F%20%E5%A4%84%E7%90%86%E6%8C%89%E9%94%AE%E4%BA%8B%E4%BB%B6%0A%09class%20ClickEvent%20implements%20OnClickListener%20%7B%0A%09%09%40Override%0A%09%09public%20void%20onClick(View%20v)%20%7B%0A%09%09%09if%20(v%20%3D%3D%20mButton)%20%7B%0A%09%09%09%09showRoundCornerDialog(RoundCorner.this%2C%20RoundCorner.this.findViewById(R.id.Button01))%3B%0A%09%09%09%7D%0A%09%09%7D%0A%09%7D%0A%0A%09%2F%2F%20%E6%98%BE%E7%A4%BA%E5%9C%86%E8%A7%92%E5%AF%B9%E8%AF%9D%E6%A1%86%0A%09public%20void%20showRoundCornerDialog(Context%20context%2C%20View%20parent)%20%7B%0A%09%09LayoutInflater%20inflater%20%3D%20(LayoutInflater)%20context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)%3B%0A%09%09%0A%09%09%2F%2F%20%E8%8E%B7%E5%8F%96%E5%9C%86%E8%A7%92%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%B8%83%E5%B1%80View%EF%BC%8C%E8%83%8C%E6%99%AF%E8%AE%BE%E4%B8%BA%E5%9C%86%E8%A7%92%0A%09%09final%20View%20dialogView%20%3D%20inflater.inflate(R.layout.popupwindow%2C%20null%2C%20false)%3B%0A%09%09dialogView.setBackgroundResource(R.drawable.rounded_corners_view)%3B%20%0A%09%09%0A%09%09%2F%2F%20%E5%88%9B%E5%BB%BA%E5%BC%B9%E5%87%BA%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%BC%B9%E5%87%BA%E5%AF%B9%E8%AF%9D%E6%A1%86%E7%9A%84%E8%83%8C%E6%99%AF%E4%B8%BA%E5%9C%86%E8%A7%92%20%0A%09%09final%20PopupWindow%20pw%20%3D%20new%20PopupWindow(dialogView%2C%20300%2C%20LayoutParams.WRAP_CONTENT%2C%20true)%3B%0A%09%09pw.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_corners_pop))%3B%0A%09%09%0A%09%09%2F%2F%E6%B3%A8%EF%BC%9A%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%AE%BE%E8%83%8C%E6%99%AF%E6%93%8D%E4%BD%9C%E4%B8%BA%E9%87%8D%E7%82%B9%E9%83%A8%E5%88%86%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%87%AA%E8%A1%8C%E6%B3%A8%E9%87%8A%E6%8E%89%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E6%88%96%E4%B8%A4%E4%B8%AA%E8%AE%BE%E8%83%8C%E6%99%AF%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%9F%A5%E7%9C%8B%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%95%88%E6%9E%9C%0A%09%09%2F%2F%E6%B3%A8%EF%BC%9A%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%AE%BE%E8%83%8C%E6%99%AF%E6%93%8D%E4%BD%9C%E4%B8%BA%E9%87%8D%E7%82%B9%E9%83%A8%E5%88%86%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%87%AA%E8%A1%8C%E6%B3%A8%E9%87%8A%E6%8E%89%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E6%88%96%E4%B8%A4%E4%B8%AA%E8%AE%BE%E8%83%8C%E6%99%AF%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%9F%A5%E7%9C%8B%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%95%88%E6%9E%9C%0A%09%09%0A%09%09final%20EditText%20edtUsername%20%3D%20(EditText)%20dialogView.findViewById(R.id.username_edit)%3B%0A%09%09final%20EditText%20edtPassword%20%3D%20(EditText)%20dialogView.findViewById(R.id.password_edit)%3B%0A%09%09edtUsername.setHint(%22%E7%94%A8%E6%88%B7%E5%90%8D...%22)%3B%20%2F%2F%20%E8%AE%BE%E7%BD%AE%E6%8F%90%E7%A4%BA%E8%AF%AD%0A%09%09edtPassword.setHint(%22%E5%AF%86%E7%A0%81...%22)%3B%20%20%20%2F%2F%20%E8%AE%BE%E7%BD%AE%E6%8F%90%E7%A4%BA%E8%AF%AD%0A%0A%09%09%2F%2F%20OK%E6%8C%89%E9%92%AE%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%0A%09%09Button%20btnOK%20%3D%20(Button)%20dialogView.findViewById(R.id.BtnOK)%3B%0A%09%09btnOK.setOnClickListener(new%20OnClickListener()%20%7B%0A%09%09%09%40Override%0A%09%09%09public%20void%20onClick(View%20v)%20%7B%0A%09%09%09%09%2F%2F%20%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E6%A1%86%E5%86%85%E5%AE%B9%0A%09%09%09%09edtUsername.setText(%22username%22)%3B%0A%09%09%09%09edtPassword.setText(%22password%22)%3B%0A%09%09%09%7D%0A%09%09%7D)%3B%0A%0A%09%09%2F%2F%20Cancel%E6%8C%89%E9%92%AE%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E4%BA%8B%E4%BB%B6%0A%09%09Button%20btnCancel%20%3D%20(Button)%20dialogView.findViewById(R.id.BtnCancel)%3B%0A%09%09btnCancel.setOnClickListener(new%20OnClickListener()%20%7B%0A%09%09%09%40Override%0A%09%09%09public%20void%20onClick(View%20v)%20%7B%0A%09%09%09%09pw.dismiss()%3B%2F%2F%20%E5%85%B3%E9%97%AD%0A%09%09%09%7D%0A%09%09%7D)%3B%0A%09%09%0A%09%09%2F%2F%20%E6%98%BE%E7%A4%BARoundCorner%E5%AF%B9%E8%AF%9D%E6%A1%86%0A%09%09pw.showAtLocation(parent%2C%20Gravity.CENTER%7CGravity.BOTTOM%2C%200%2C%200)%3B%0A%09%7D%0A%09%0A%7D" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">package</span><span>&nbsp;com.test;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">import</span><span>&nbsp;android.app.Activity;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.content.Context;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.os.Bundle;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.text.InputType;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.view.Gravity;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.view.LayoutInflater;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.view.View;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.view.View.OnClickListener;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.widget.Button;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.widget.EditText;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.widget.PopupWindow;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;android.widget.LinearLayout.LayoutParams;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;RoundCorner&nbsp;</span><span class="keyword">extends</span><span>&nbsp;Activity&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;Button&nbsp;mButton;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;onCreate(Bundle&nbsp;savedInstanceState)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span><span>.onCreate(savedInstanceState);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setContentView(R.layout.main);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;定义按钮</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mButton&nbsp;=&nbsp;(Button)&nbsp;<span class="keyword">this</span><span>.findViewById(R.id.Button01);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mButton.setOnClickListener(<span class="keyword">new</span><span>&nbsp;ClickEvent());&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;两个圆角文字编辑框</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditText&nbsp;et1&nbsp;=&nbsp;(EditText)&nbsp;<span class="keyword">this</span><span>.findViewById(R.id.roundedtext1);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditText&nbsp;et2&nbsp;=&nbsp;(EditText)&nbsp;<span class="keyword">this</span><span>.findViewById(R.id.roundedtext2);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et1.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et2.setInputType(InputType.TYPE_NULL);&nbsp;<span class="comment">//不显示软键盘</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;处理按键事件</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">class</span><span>&nbsp;ClickEvent&nbsp;</span><span class="keyword">implements</span><span>&nbsp;OnClickListener&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;onClick(View&nbsp;v)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(v&nbsp;==&nbsp;mButton)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showRoundCornerDialog(RoundCorner.<span class="keyword">this</span><span>,&nbsp;RoundCorner.</span><span class="keyword">this</span><span>.findViewById(R.id.Button01));&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;显示圆角对话框</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;showRoundCornerDialog(Context&nbsp;context,&nbsp;View&nbsp;parent)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LayoutInflater&nbsp;inflater&nbsp;=&nbsp;(LayoutInflater)&nbsp;context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;获取圆角对话框布局View，背景设为圆角</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span><span>&nbsp;View&nbsp;dialogView&nbsp;=&nbsp;inflater.inflate(R.layout.popupwindow,&nbsp;</span><span class="keyword">null</span><span>,&nbsp;</span><span class="keyword">false</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialogView.setBackgroundResource(R.drawable.rounded_corners_view);&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;创建弹出对话框，设置弹出对话框的背景为圆角&nbsp;</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span><span>&nbsp;PopupWindow&nbsp;pw&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;PopupWindow(dialogView,&nbsp;</span><span class="number">300</span><span>,&nbsp;LayoutParams.WRAP_CONTENT,&nbsp;</span><span class="keyword">true</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pw.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_corners_pop));&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//注：上面的设背景操作为重点部分，可以自行注释掉其中一个或两个设背景操作，查看对话框效果</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//注：上面的设背景操作为重点部分，可以自行注释掉其中一个或两个设背景操作，查看对话框效果</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span><span>&nbsp;EditText&nbsp;edtUsername&nbsp;=&nbsp;(EditText)&nbsp;dialogView.findViewById(R.id.username_edit);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span><span>&nbsp;EditText&nbsp;edtPassword&nbsp;=&nbsp;(EditText)&nbsp;dialogView.findViewById(R.id.password_edit);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edtUsername.setHint(<span class="string">"用户名..."</span><span>);&nbsp;</span><span class="comment">//&nbsp;设置提示语</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edtPassword.setHint(<span class="string">"密码..."</span><span>);&nbsp;&nbsp;&nbsp;</span><span class="comment">//&nbsp;设置提示语</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;OK按钮及其处理事件</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Button&nbsp;btnOK&nbsp;=&nbsp;(Button)&nbsp;dialogView.findViewById(R.id.BtnOK);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;btnOK.setOnClickListener(<span class="keyword">new</span><span>&nbsp;OnClickListener()&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;onClick(View&nbsp;v)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;设置文本框内容</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edtUsername.setText(<span class="string">"username"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edtPassword.setText(<span class="string">"password"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Cancel按钮及其处理事件</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Button&nbsp;btnCancel&nbsp;=&nbsp;(Button)&nbsp;dialogView.findViewById(R.id.BtnCancel);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;btnCancel.setOnClickListener(<span class="keyword">new</span><span>&nbsp;OnClickListener()&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;onClick(View&nbsp;v)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pw.dismiss();<span class="comment">//&nbsp;关闭</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;显示RoundCorner对话框</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pw.showAtLocation(parent,&nbsp;Gravity.CENTER|Gravity.BOTTOM,&nbsp;<span class="number">0</span><span>,&nbsp;</span><span class="number">0</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="0" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">package com.test;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.text.InputType;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.LinearLayout.LayoutParams;
+
+
+public class RoundCorner extends Activity {
+
+	Button mButton; 
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		
+		// 定义按钮
+		mButton = (Button) this.findViewById(R.id.Button01);
+		mButton.setOnClickListener(new ClickEvent());
+		
+		// 两个圆角文字编辑框
+		EditText et1 = (EditText) this.findViewById(R.id.roundedtext1);
+		EditText et2 = (EditText) this.findViewById(R.id.roundedtext2);
+		et1.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+		et2.setInputType(InputType.TYPE_NULL); //不显示软键盘
+		
+	}
+
+	// 处理按键事件
+	class ClickEvent implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+			if (v == mButton) {
+				showRoundCornerDialog(RoundCorner.this, RoundCorner.this.findViewById(R.id.Button01));
+			}
+		}
+	}
+
+	// 显示圆角对话框
+	public void showRoundCornerDialog(Context context, View parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		// 获取圆角对话框布局View，背景设为圆角
+		final View dialogView = inflater.inflate(R.layout.popupwindow, null, false);
+		dialogView.setBackgroundResource(R.drawable.rounded_corners_view); 
+		
+		// 创建弹出对话框，设置弹出对话框的背景为圆角 
+		final PopupWindow pw = new PopupWindow(dialogView, 300, LayoutParams.WRAP_CONTENT, true);
+		pw.setBackgroundDrawable(getResources().getDrawable(R.drawable.rounded_corners_pop));
+		
+		//注：上面的设背景操作为重点部分，可以自行注释掉其中一个或两个设背景操作，查看对话框效果
+		//注：上面的设背景操作为重点部分，可以自行注释掉其中一个或两个设背景操作，查看对话框效果
+		
+		final EditText edtUsername = (EditText) dialogView.findViewById(R.id.username_edit);
+		final EditText edtPassword = (EditText) dialogView.findViewById(R.id.password_edit);
+		edtUsername.setHint("用户名..."); // 设置提示语
+		edtPassword.setHint("密码...");   // 设置提示语
+
+		// OK按钮及其处理事件
+		Button btnOK = (Button) dialogView.findViewById(R.id.BtnOK);
+		btnOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// 设置文本框内容
+				edtUsername.setText("username");
+				edtPassword.setText("password");
+			}
+		});
+
+		// Cancel按钮及其处理事件
+		Button btnCancel = (Button) dialogView.findViewById(R.id.BtnCancel);
+		btnCancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				pw.dismiss();// 关闭
+			}
+		});
+		
+		// 显示RoundCorner对话框
+		pw.showAtLocation(parent, Gravity.CENTER|Gravity.BOTTOM, 0, 0);
+	}
+	
+}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>1，圆角对话框的背景布局文件XML。</p>
+<p>--------rounded_corners_pop.xml此为PopupWindow的背景布局文件</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Cshape%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%3E%0A%09%3Csolid%20android%3Acolor%3D%22%23ffffffff%22%20%2F%3E%0A%09%0A%09%3Cstroke%20android%3Awidth%3D%223dp%22%20color%3D%22%23ffff8080%22%20%2F%3E%0A%09%0A%09%3Ccorners%20android%3Aradius%3D%2210dp%22%20%2F%3E%0A%09%0A%09%3Cpadding%20android%3Aleft%3D%223dp%22%20android%3Atop%3D%223dp%22%20%0A%09%09android%3Aright%3D%223dp%22%20android%3Abottom%3D%223dp%22%20%2F%3E%0A%3C%2Fshape%3E" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;shape&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;solid&nbsp;android:color=<span class="string">"#ffffffff"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;stroke&nbsp;android:width=<span class="string">"3dp"</span><span>&nbsp;color=</span><span class="string">"#ffff8080"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;corners&nbsp;android:radius=<span class="string">"10dp"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;padding&nbsp;android:left=<span class="string">"3dp"</span><span>&nbsp;android:top=</span><span class="string">"3dp"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:right=<span class="string">"3dp"</span><span>&nbsp;android:bottom=</span><span class="string">"3dp"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;/shape&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="1" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+	&lt;solid android:color="#ffffffff" /&gt;
+	
+	&lt;stroke android:width="3dp" color="#ffff8080" /&gt;
+	
+	&lt;corners android:radius="10dp" /&gt;
+	
+	&lt;padding android:left="3dp" android:top="3dp" 
+		android:right="3dp" android:bottom="3dp" /&gt;
+&lt;/shape&gt;</pre>
+<p>&nbsp;</p>
+<p>--------rounded_corners_view.xml此为对话框内容的背景布局文件</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Cshape%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%3E%0A%09%3Csolid%20android%3Acolor%3D%22%23ff606060%22%20%2F%3E%0A%09%0A%09%3Cstroke%20android%3Awidth%3D%223dp%22%20color%3D%22%23ffff8080%22%20%2F%3E%0A%09%0A%09%3Ccorners%20android%3Aradius%3D%2210dp%22%20%2F%3E%0A%09%0A%09%3Cpadding%20android%3Aleft%3D%225dp%22%20android%3Atop%3D%225dp%22%20%0A%09%09android%3Aright%3D%225dp%22%20android%3Abottom%3D%225dp%22%20%2F%3E%0A%3C%2Fshape%3E" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;shape&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;solid&nbsp;android:color=<span class="string">"#ff606060"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;stroke&nbsp;android:width=<span class="string">"3dp"</span><span>&nbsp;color=</span><span class="string">"#ffff8080"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;corners&nbsp;android:radius=<span class="string">"10dp"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;padding&nbsp;android:left=<span class="string">"5dp"</span><span>&nbsp;android:top=</span><span class="string">"5dp"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:right=<span class="string">"5dp"</span><span>&nbsp;android:bottom=</span><span class="string">"5dp"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;/shape&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="2" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+	&lt;solid android:color="#ff606060" /&gt;
+	
+	&lt;stroke android:width="3dp" color="#ffff8080" /&gt;
+	
+	&lt;corners android:radius="10dp" /&gt;
+	
+	&lt;padding android:left="5dp" android:top="5dp" 
+		android:right="5dp" android:bottom="5dp" /&gt;
+&lt;/shape&gt;</pre>
+<p>&nbsp;</p>
+<p>&nbsp;2，圆角文字编辑框的三个布局XML文件</p>
+<p>---------rounded_edittext_states.xml</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%20%0A%3Cselector%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%3E%20%0A%20%20%20%20%3Citem%20%20%0A%20%20%20%20%20%09android%3Astate_pressed%3D%22true%22%20%20%0A%20%20%20%20%20%09android%3Astate_enabled%3D%22true%22%20%0A%20%20%20%20%20%20%20%20android%3Adrawable%3D%22%40drawable%2Frounded_focused%22%20%2F%3E%20%0A%20%20%20%20%3Citem%20%20%0A%20%20%20%20%20%09android%3Astate_focused%3D%22true%22%20%20%0A%20%20%20%20%20%09android%3Astate_enabled%3D%22true%22%20%0A%20%20%20%20%20%20%20%20android%3Adrawable%3D%22%40drawable%2Frounded_focused%22%20%2F%3E%20%0A%20%20%20%20%3Citem%20%20%0A%20%20%20%20%20%09android%3Astate_enabled%3D%22true%22%20%0A%20%20%20%20%20%20%20%20android%3Adrawable%3D%22%40drawable%2Frounded_edittext%22%20%2F%3E%20%0A%3C%2Fselector%3E%20" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;selector&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;item&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:state_pressed=<span class="string">"true"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:state_enabled=<span class="string">"true"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:drawable=<span class="string">"@drawable/rounded_focused"</span><span>&nbsp;/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;item&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:state_focused=<span class="string">"true"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:state_enabled=<span class="string">"true"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:drawable=<span class="string">"@drawable/rounded_focused"</span><span>&nbsp;/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;item&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:state_enabled=<span class="string">"true"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:drawable=<span class="string">"@drawable/rounded_edittext"</span><span>&nbsp;/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;/selector&gt;&nbsp;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="3" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"&gt; 
+    &lt;item  
+     	android:state_pressed="true"  
+     	android:state_enabled="true" 
+        android:drawable="@drawable/rounded_focused" /&gt; 
+    &lt;item  
+     	android:state_focused="true"  
+     	android:state_enabled="true" 
+        android:drawable="@drawable/rounded_focused" /&gt; 
+    &lt;item  
+     	android:state_enabled="true" 
+        android:drawable="@drawable/rounded_edittext" /&gt; 
+&lt;/selector&gt; </pre>
+<p>&nbsp;</p>
+<p>----------rounded_edittext.xml</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%20%0A%3Cshape%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%20%0A%09android%3Ashape%3D%22rectangle%22%20%0A%09android%3Apadding%3D%228dip%22%3E%20%0A%20%09%3Csolid%20android%3Acolor%3D%22%23FFFFFF%22%2F%3E%20%0A%20%20%20%20%3Ccorners%20%0A%20%20%20%20%20%09android%3AbottomRightRadius%3D%2210dip%22%20%0A%20%20%20%20%20%09android%3AbottomLeftRadius%3D%2210dip%22%20%0A%20%20%09%09android%3AtopLeftRadius%3D%2210dip%22%20%0A%20%20%09%09android%3AtopRightRadius%3D%2210dip%22%2F%3E%20%0A%3C%2Fshape%3E" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;shape&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:shape=<span class="string">"rectangle"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:padding=<span class="string">"8dip"</span><span>&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;solid&nbsp;android:color=<span class="string">"#FFFFFF"</span><span>/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;corners&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:bottomRightRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:bottomLeftRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:topLeftRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:topRightRadius=<span class="string">"10dip"</span><span>/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;/shape&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="4" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:shape="rectangle" 
+	android:padding="8dip"&gt; 
+ 	&lt;solid android:color="#FFFFFF"/&gt; 
+    &lt;corners 
+     	android:bottomRightRadius="10dip" 
+     	android:bottomLeftRadius="10dip" 
+  		android:topLeftRadius="10dip" 
+  		android:topRightRadius="10dip"/&gt; 
+&lt;/shape&gt;</pre>
+<p>&nbsp;</p>
+<p>-----------rounded_edittext_focused.xml</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%20%0A%3Cshape%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%20%0A%09android%3Ashape%3D%22rectangle%22%20%0A%09android%3Apadding%3D%228dip%22%3E%20%0A%20%09%3Csolid%20android%3Acolor%3D%22%23FFFFFF%22%2F%3E%20%0A%20%09%3Cstroke%20android%3Awidth%3D%222dip%22%20android%3Acolor%3D%22%23FF0000%22%20%2F%3E%20%0A%20%20%20%20%3Ccorners%20%0A%20%20%20%20%20%09android%3AbottomRightRadius%3D%2210dip%22%20%0A%20%20%20%20%20%09android%3AbottomLeftRadius%3D%2210dip%22%20%0A%20%20%09%09android%3AtopLeftRadius%3D%2210dip%22%20%0A%20%20%09%09android%3AtopRightRadius%3D%2210dip%22%2F%3E%20%0A%3C%2Fshape%3E%20" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;shape&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:shape=<span class="string">"rectangle"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:padding=<span class="string">"8dip"</span><span>&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;solid&nbsp;android:color=<span class="string">"#FFFFFF"</span><span>/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;stroke&nbsp;android:width=<span class="string">"2dip"</span><span>&nbsp;android:color=</span><span class="string">"#FF0000"</span><span>&nbsp;/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;corners&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:bottomRightRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:bottomLeftRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:topLeftRadius=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:topRightRadius=<span class="string">"10dip"</span><span>/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&lt;/shape&gt;&nbsp;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="5" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt; 
+&lt;shape xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:shape="rectangle" 
+	android:padding="8dip"&gt; 
+ 	&lt;solid android:color="#FFFFFF"/&gt; 
+ 	&lt;stroke android:width="2dip" android:color="#FF0000" /&gt; 
+    &lt;corners 
+     	android:bottomRightRadius="10dip" 
+     	android:bottomLeftRadius="10dip" 
+  		android:topLeftRadius="10dip" 
+  		android:topRightRadius="10dip"/&gt; 
+&lt;/shape&gt; </pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>3，对话框的布局文件popupwindow.xml</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%0A%3CLinearLayout%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%0A%09android%3Alayout_width%3D%22fill_parent%22%20android%3Alayout_height%3D%22wrap_content%22%0A%09android%3Aorientation%3D%22vertical%22%3E%0A%0A%09%3CTextView%20android%3Aid%3D%22%40%2Bid%2Fusername_view%22%0A%09%09android%3Alayout_height%3D%22wrap_content%22%0A%09%09android%3Alayout_width%3D%22fill_parent%22%0A%09%09android%3Alayout_marginLeft%3D%2210dip%22%0A%09%09android%3Alayout_marginRight%3D%2210dip%22%20%0A%09%09android%3Atext%3D%22%E7%94%A8%E6%88%B7%E5%90%8D%22%0A%09%09android%3AtextAppearance%3D%22%3Fandroid%3Aattr%2FtextAppearanceMedium%22%2F%3E%0A%0A%09%3CEditText%20android%3Aid%3D%22%40%2Bid%2Fusername_edit%22%0A%09%09android%3Alayout_height%3D%22wrap_content%22%0A%09%09android%3Alayout_width%3D%22fill_parent%22%20%0A%09%09android%3Alayout_marginLeft%3D%2210dip%22%0A%09%09android%3Alayout_marginRight%3D%2210dip%22%20%0A%09%09android%3Acapitalize%3D%22none%22%0A%09%09android%3AtextAppearance%3D%22%3Fandroid%3Aattr%2FtextAppearanceMedium%22%20%2F%3E%0A%0A%09%3CTextView%20android%3Aid%3D%22%40%2Bid%2Fpassword_view%22%0A%09%09android%3Alayout_height%3D%22wrap_content%22%0A%09%09android%3Alayout_width%3D%22fill_parent%22%0A%09%09android%3Alayout_marginLeft%3D%2210dip%22%0A%09%09android%3Alayout_marginRight%3D%2210dip%22%20%0A%09%09android%3Atext%3D%22%E5%AF%86%E7%A0%81%22%0A%09%09android%3AtextAppearance%3D%22%3Fandroid%3Aattr%2FtextAppearanceMedium%22%2F%3E%0A%0A%09%3CEditText%20android%3Aid%3D%22%40%2Bid%2Fpassword_edit%22%0A%09%09android%3Alayout_height%3D%22wrap_content%22%0A%09%09android%3Alayout_width%3D%22fill_parent%22%20%0A%09%09android%3Alayout_marginLeft%3D%2210dip%22%0A%09%09android%3Alayout_marginRight%3D%2210dip%22%20%0A%09%09android%3Acapitalize%3D%22none%22%0A%09%09android%3Apassword%3D%22true%22%0A%09%09android%3AtextAppearance%3D%22%3Fandroid%3Aattr%2FtextAppearanceMedium%22%20%2F%3E%0A%0A%09%3CLinearLayout%20android%3Aid%3D%22%40%2Bid%2FLinearLayout01%22%0A%09%09android%3Alayout_height%3D%22wrap_content%22%20%0A%09%09android%3Alayout_width%3D%22fill_parent%22%0A%09%09android%3Agravity%3D%22center%22%0A%09%09android%3ApaddingLeft%3D%2210dip%22%0A%09%09android%3ApaddingRight%3D%2210dip%22%3E%0A%09%09%0A%09%09%3CButton%20android%3Aid%3D%22%40%2Bid%2FBtnOK%22%0A%09%09%09android%3Alayout_width%3D%22wrap_content%22%0A%09%09%09android%3Alayout_height%3D%22wrap_content%22%20%0A%09%09%09android%3Alayout_weight%3D%221%22%20%0A%09%09%09android%3Atext%3D%22%E7%A1%AE%E5%AE%9A%22%2F%3E%0A%09%09%09%0A%09%09%3CButton%20android%3Aid%3D%22%40%2Bid%2FBtnCancel%22%0A%09%09%09android%3Alayout_width%3D%22wrap_content%22%0A%09%09%09android%3Alayout_height%3D%22wrap_content%22%20%0A%09%09%09android%3Alayout_weight%3D%221%22%0A%09%09%09android%3Atext%3D%22%E5%8F%96%E6%B6%88%22%2F%3E%0A%09%3C%2FLinearLayout%3E%0A%0A%3C%2FLinearLayout%3E" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&lt;LinearLayout&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;android:layout_height=</span><span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:orientation=<span class="string">"vertical"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;TextView&nbsp;android:id=<span class="string">"@+id/username_view"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginLeft=<span class="string">"10dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginRight=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"用户名"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textAppearance=<span class="string">"?android:attr/textAppearanceMedium"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;EditText&nbsp;android:id=<span class="string">"@+id/username_edit"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginLeft=<span class="string">"10dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginRight=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:capitalize=<span class="string">"none"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textAppearance=<span class="string">"?android:attr/textAppearanceMedium"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;TextView&nbsp;android:id=<span class="string">"@+id/password_view"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginLeft=<span class="string">"10dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginRight=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"密码"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textAppearance=<span class="string">"?android:attr/textAppearanceMedium"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;EditText&nbsp;android:id=<span class="string">"@+id/password_edit"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginLeft=<span class="string">"10dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginRight=<span class="string">"10dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:capitalize=<span class="string">"none"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:password=<span class="string">"true"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textAppearance=<span class="string">"?android:attr/textAppearanceMedium"</span><span>&nbsp;/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;LinearLayout&nbsp;android:id=<span class="string">"@+id/LinearLayout01"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:gravity=<span class="string">"center"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:paddingLeft=<span class="string">"10dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:paddingRight=<span class="string">"10dip"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button&nbsp;android:id=<span class="string">"@+id/BtnOK"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_weight=<span class="string">"1"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"确定"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button&nbsp;android:id=<span class="string">"@+id/BtnCancel"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_weight=<span class="string">"1"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"取消"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LinearLayout&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&lt;/LinearLayout&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="6" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical"&gt;
+
+	&lt;TextView android:id="@+id/username_view"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip" 
+		android:text="用户名"
+		android:textAppearance="?android:attr/textAppearanceMedium"/&gt;
+
+	&lt;EditText android:id="@+id/username_edit"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent" 
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip" 
+		android:capitalize="none"
+		android:textAppearance="?android:attr/textAppearanceMedium" /&gt;
+
+	&lt;TextView android:id="@+id/password_view"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip" 
+		android:text="密码"
+		android:textAppearance="?android:attr/textAppearanceMedium"/&gt;
+
+	&lt;EditText android:id="@+id/password_edit"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent" 
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip" 
+		android:capitalize="none"
+		android:password="true"
+		android:textAppearance="?android:attr/textAppearanceMedium" /&gt;
+
+	&lt;LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent"
+		android:gravity="center"
+		android:paddingLeft="10dip"
+		android:paddingRight="10dip"&gt;
+		
+		&lt;Button android:id="@+id/BtnOK"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:layout_weight="1" 
+			android:text="确定"/&gt;
+			
+		&lt;Button android:id="@+id/BtnCancel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:layout_weight="1"
+			android:text="取消"/&gt;
+	&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>4，主布局文件 main.xml</p>
+<div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3CLinearLayout%20xmlns%3Aandroid%3D%22http%3A%2F%2Fschemas.android.com%2Fapk%2Fres%2Fandroid%22%0A%09android%3Aorientation%3D%22vertical%22%20android%3Alayout_width%3D%22fill_parent%22%0A%09android%3Alayout_height%3D%22fill_parent%22%0A%09android%3ApaddingTop%3D%2210dip%22%3E%0A%09%0A%09%3CEditText%20android%3Aid%3D%22%40%2Bid%2Froundedtext1%22%20%20%0A%09%20%20%20%20android%3Alayout_width%3D%22fill_parent%22%20%20%0A%09%20%20%20%20android%3Alayout_height%3D%22wrap_content%22%20%20%0A%09%20%20%20%20android%3Atext%3D%22%E5%9C%86%E8%A7%92%E7%BC%96%E8%BE%91%E6%A1%86%E5%AE%9E%E4%BE%8B%22%20%0A%09%20%20%20%20android%3Apadding%3D%225dip%22%20%0A%09%20%20%20%20android%3Abackground%3D%22%40drawable%2Frounded_edittext%22%20%2F%3E%20%0A%09%20%20%20%20%0A%09%3C!--%20%E6%AD%A4View%E4%B8%BA%E5%B8%83%E5%B1%80%E4%BD%BF%E7%94%A8%20--%3E%0A%09%3CView%20android%3Alayout_height%3D%225dip%22%20android%3Alayout_width%3D%22fill_parent%22%2F%3E%0A%09%09%0A%09%3CEditText%20android%3Aid%3D%22%40%2Bid%2Froundedtext2%22%20%20%20%0A%09%20%20%20%20android%3Alayout_width%3D%22fill_parent%22%20%20%0A%09%20%20%20%20android%3Alayout_height%3D%22wrap_content%22%20%20%0A%09%20%20%20%20android%3Atext%3D%22%E8%81%9A%E7%84%A6%E5%8F%AF%E5%8F%98%E8%BE%B9%E6%A1%86%E9%A2%9C%E8%89%B2%22%20%0A%09%20%20%20%20android%3Apadding%3D%225dip%22%0A%09%20%20%20%20android%3ApaddingTop%3D%2230dip%22%0A%09%20%20%20%20android%3Abackground%3D%22%40drawable%2Frounded_edittext_states%22%2F%3E%20%0A%0A%09%3C!--%20%E6%AD%A4View%E4%B8%BA%E5%B8%83%E5%B1%80%E4%BD%BF%E7%94%A8%20--%3E%0A%09%3CView%20android%3Alayout_height%3D%225dip%22%20android%3Alayout_width%3D%22fill_parent%22%2F%3E%0A%0A%09%3CButton%20android%3Aid%3D%22%40%2Bid%2FButton01%22%20%0A%09%09android%3Alayout_height%3D%22wrap_content%22%0A%09%09android%3Alayout_width%3D%22fill_parent%22%20%0A%09%09android%3Atext%3D%22%E5%BC%B9%E5%87%BA%E5%9C%86%E8%A7%92%E5%AF%B9%E8%AF%9D%E6%A1%86%22%2F%3E%0A%09%09%0A%3C%2FLinearLayout%3E" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>&lt;?xml&nbsp;version=</span><span class="string">"1.0"</span><span>&nbsp;encoding=</span><span class="string">"utf-8"</span><span>?&gt;&nbsp;&nbsp;</span></span></li><li><span>&lt;LinearLayout&nbsp;xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:orientation=<span class="string">"vertical"</span><span>&nbsp;android:layout_width=</span><span class="string">"fill_parent"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;android:paddingTop=<span class="string">"10dip"</span><span>&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;EditText&nbsp;android:id=<span class="string">"@+id/roundedtext1"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"圆角编辑框实例"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:padding=<span class="string">"5dip"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:background=<span class="string">"@drawable/rounded_edittext"</span><span>&nbsp;/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;此View为布局使用&nbsp;--&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;View&nbsp;android:layout_height=<span class="string">"5dip"</span><span>&nbsp;android:layout_width=</span><span class="string">"fill_parent"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;EditText&nbsp;android:id=<span class="string">"@+id/roundedtext2"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"聚焦可变边框颜色"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:padding=<span class="string">"5dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:paddingTop=<span class="string">"30dip"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:background=<span class="string">"@drawable/rounded_edittext_states"</span><span>/&gt;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;此View为布局使用&nbsp;--&gt;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;View&nbsp;android:layout_height=<span class="string">"5dip"</span><span>&nbsp;android:layout_width=</span><span class="string">"fill_parent"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button&nbsp;android:id=<span class="string">"@+id/Button01"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=<span class="string">"wrap_content"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=<span class="string">"fill_parent"</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text=<span class="string">"弹出圆角对话框"</span><span>/&gt;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&lt;/LinearLayout&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="812600" codeable_type="Blog" source_url="http://ypf3027.iteye.com/blog/812600" pre_index="7" title="圆角PopupWindow对话框和圆角EditText" style="display: none;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:paddingTop="10dip"&gt;
+	
+	&lt;EditText android:id="@+id/roundedtext1"  
+	    android:layout_width="fill_parent"  
+	    android:layout_height="wrap_content"  
+	    android:text="圆角编辑框实例" 
+	    android:padding="5dip" 
+	    android:background="@drawable/rounded_edittext" /&gt; 
+	    
+	&lt;!-- 此View为布局使用 --&gt;
+	&lt;View android:layout_height="5dip" android:layout_width="fill_parent"/&gt;
+		
+	&lt;EditText android:id="@+id/roundedtext2"   
+	    android:layout_width="fill_parent"  
+	    android:layout_height="wrap_content"  
+	    android:text="聚焦可变边框颜色" 
+	    android:padding="5dip"
+	    android:paddingTop="30dip"
+	    android:background="@drawable/rounded_edittext_states"/&gt; 
+
+	&lt;!-- 此View为布局使用 --&gt;
+	&lt;View android:layout_height="5dip" android:layout_width="fill_parent"/&gt;
+
+	&lt;Button android:id="@+id/Button01" 
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent" 
+		android:text="弹出圆角对话框"/&gt;
+		
+&lt;/LinearLayout&gt;</pre>
+<p>&nbsp;</p>
+<p>注：附件中为完整项目代码实例</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+  </div>
+
+  
+  <div class="attachments">
+    
+      
+        <ul>
+          <li><a href="http://dl.iteye.com/topics/download/45c66d02-2b91-32d1-9c94-cfb4c791a9f1">RoundCorner.rar</a> (40.8 KB)</li>
+          
+          <li>下载次数: 596</li>
+        </ul>
+      
+    
+      
+        <ul style="display:none;">
+          <li><a href="http://dl2.iteye.com/upload/attachment/0034/9105/70666160-3fe6-3156-90f2-bfa85908c6e6.png" target="_blank"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/70666160-3fe6-3156-90f2-bfa85908c6e6-thumb.png" class="magplus" title="点击查看原始大小图片"></a></li>
+          
+          <li>大小: 16.4 KB</li>
+        </ul>
+      
+    
+      
+        <ul style="display:none;">
+          <li><a href="http://dl2.iteye.com/upload/attachment/0034/9107/b8b4ff2b-5c49-3c3f-a538-a1bec354bb14.png" target="_blank"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/b8b4ff2b-5c49-3c3f-a538-a1bec354bb14-thumb.png" class="magplus" title="点击查看原始大小图片"></a></li>
+          
+          <li>大小: 9.3 KB</li>
+        </ul>
+      
+    
+    
+      <ul>
+        <li><a href="http://ypf3027.iteye.com/blog/812600#" onclick="$$(&#39;div.attachments ul&#39;).invoke(&#39;show&#39;);$(this).up(1).hide();return false;">查看图片附件</a></li>
+      </ul>
+    
+  </div>
+
+
+  
+  
+  <iframe src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/794.html" scrolling="no" width="680" height="90" frameborder="0"></iframe>
+  
+  <div id="bottoms" class="clearfix">
+    <div id="digg_bottom" class="clearfix"><div class="digged"><strong>10</strong> <br>顶</div><div class="digged"><strong>0</strong> <br>踩</div></div>
+    <div id="share_weibo">分享到：
+      <a data-type="sina" href="javascript:;" title="分享到新浪微博"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/sina.jpg"></a>
+      <a data-type="qq" href="javascript:;" title="分享到腾讯微博"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="http://ypf3027.iteye.com/blog/812812" class="next" title="访问其它程序的SharedPreferences中的数据">访问其它程序的SharedPreferences中的数据</a>
+      |
+      <a href="http://ypf3027.iteye.com/blog/812495" class="pre" title="自定义Activity漂亮跳转效果">自定义Activity漂亮跳转效果</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2010-11-16 11:42</li>
+      <li>浏览 9394</li>
+      <li><a href="http://ypf3027.iteye.com/blog/812600#comments">评论(4)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/mobile">移动开发</a></li>      
+      <li class="last"><a href="http://www.iteye.com/wiki/blog/812600" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    <div id="bc2345284">
+  <div class="comment_title">
+    4 楼
+    <a href="http://chenzheng8975.iteye.com/" target="_blank" title="chenzheng8975">chenzheng8975</a>
+    2014-04-15&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">搞得不错 32个赞。。。。。</div>
+</div>
+
+<div id="bc2276172">
+  <div class="comment_title">
+    3 楼
+    <a href="http://731581552.iteye.com/" target="_blank" title="雪尹江泽">雪尹江泽</a>
+    2012-08-14&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">千言万语，就一句：太感谢你了！</div>
+</div>
+
+<div id="bc2266203">
+  <div class="comment_title">
+    2 楼
+    <a href="http://495095492.iteye.com/" target="_blank" title="星光成">星光成</a>
+    2012-06-25&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_surprised.gif">&nbsp;<img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_lol.gif"> </div>
+</div>
+
+<div id="bc1855784">
+  <div class="comment_title">
+    1 楼
+    <a href="http://windloverain.iteye.com/" target="_blank" title="windloverain">windloverain</a>
+    2011-01-16&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_biggrin.gif">&nbsp;<img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_biggrin.gif"> 谢谢！</div>
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="http://ypf3027.iteye.com/login" style="background-color:white;"> <img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/login_icon.png" style="vertical-align:middle; margin-right: 10px;"></a><a href="http://ypf3027.iteye.com/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 812600;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', '圆角PopupWindow对话框和圆角EditText');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', '圆角PopupWindow对话框和圆角EditText');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href="http://ypf3027.iteye.com/"><img alt="ypf3027的博客" class="logo" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/eb2f199d-72b3-3b2f-9520-3035221d5b10.jpg" title="ypf3027的博客: 乘长风破万里浪" width=""></a></div>
+  <div id="blog_owner_name">ypf3027</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 152107 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/icon_minigender_1.gif" title="男"></li>
+              <li>来自: 北京</li>
+              <li><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/offline.gif"></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style="font-weight:normal;font-size:12px;padding-left:30px;"><a href="http://ypf3027.iteye.com/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://coolworld.iteye.com/" target="_blank"><img alt="coolworld的博客" class="logo" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/user-logo-thumb.gif" title="coolworld的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://coolworld.iteye.com/" target="_blank" title="coolworld">coolworld</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://xuyunti.iteye.com/" target="_blank"><img alt="xuyunti的博客" class="logo" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/user-logo-thumb.gif" title="xuyunti的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://xuyunti.iteye.com/" target="_blank" title="xuyunti">xuyunti</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://wwt831208.iteye.com/" target="_blank"><img alt="wwt831208的博客" class="logo" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/user-logo-thumb.gif" title="wwt831208的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://wwt831208.iteye.com/" target="_blank" title="wwt831208">wwt831208</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://wangfeng-1122.iteye.com/" target="_blank"><img alt="wangfeng_1122的博客" class="logo" src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/user-logo-thumb.gif" title="wangfeng_1122的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://wangfeng-1122.iteye.com/" target="_blank" title="wangfeng_1122">wangfeng_1122</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="http://ypf3027.iteye.com/">全部博客 (49)</a></li>
+                
+                  <li><a href="http://ypf3027.iteye.com/category/129642">JAVA (6)</a></li>
+                
+                  <li><a href="http://ypf3027.iteye.com/category/153007">iOS (5)</a></li>
+                
+                  <li><a href="http://ypf3027.iteye.com/category/129643">Android (6)</a></li>
+                
+                  <li><a href="http://ypf3027.iteye.com/category/132606">Linux (14)</a></li>
+                
+                  <li><a href="http://ypf3027.iteye.com/category/129644">杂谈 (9)</a></li>
+                
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="http://ypf3027.iteye.com/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="http://ypf3027.iteye.com/blog/post">我的论坛</a> (14)
+                </li>
+                <li><a href="http://ypf3027.iteye.com/blog/answered_problems">我的问答</a> (0)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="http://ypf3027.iteye.com/blog/monthblog/2014-02">2014-02</a> (2)</li>
+                
+                  <li><a href="http://ypf3027.iteye.com/blog/monthblog/2014-01">2014-01</a> (4)</li>
+                
+                  <li><a href="http://ypf3027.iteye.com/blog/monthblog/2013-07">2013-07</a> (1)</li>
+                
+                <li><a href="http://ypf3027.iteye.com/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href="http://zczjdyj123.iteye.com/" target="_blank" title="zczjdyj123">zczjdyj123</a>： 
+                   ...<br>
+                  <a href="http://ypf3027.iteye.com/blog/1405507#bc2363906">Linux SSH 登录其他机器</a>
+                </li>
+                
+                <li>
+                  <a href="http://chenzheng8975.iteye.com/" target="_blank" title="chenzheng8975">chenzheng8975</a>： 
+                  搞得不错 32个赞。。。。。<br>
+                  <a href="http://ypf3027.iteye.com/blog/812600#bc2345284">圆角PopupWindow对话框和圆角EditText</a>
+                </li>
+                
+                <li>
+                  <a href="http://guoxianyu521.iteye.com/" target="_blank" title="guoxianyu521">guoxianyu521</a>： 
+                   感谢楼主！！！！<br>
+                  <a href="http://ypf3027.iteye.com/blog/831613#bc2342379">DateChooser日期选择器swing</a>
+                </li>
+                
+                <li>
+                  <a href="http://731581552.iteye.com/" target="_blank" title="雪尹江泽">雪尹江泽</a>： 
+                  千言万语，就一句：太感谢你了！<br>
+                  <a href="http://ypf3027.iteye.com/blog/812600#bc2276172">圆角PopupWindow对话框和圆角EditText</a>
+                </li>
+                
+                <li>
+                  <a href="http://laozhao.iteye.com/" target="_blank" title="laozhao">laozhao</a>： 
+                  非常感谢楼主，非常好用。抄走了。呵呵。<br>
+                  <a href="http://ypf3027.iteye.com/blog/831613#bc2272985">DateChooser日期选择器swing</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br>
+          © 2003-2016 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/saved_resource" width="0" height="0">
+
+<script src="./圆角PopupWindow对话框和圆角EditText - 乘长风破万里浪 - ITeye技术网站_files/tracking.js" type="text/javascript"></script>
+
+    
+    
+  
+
+</body></html>

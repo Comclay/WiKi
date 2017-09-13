@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.comclay.microvideolib">
+
+    <!--扩展存储空间的读权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--扩展存储空间的写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <activity android:name="com.comclay.microvideolib.CameraVideoActivtiy"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"/>
+
+    </application>
+
+</manifest>

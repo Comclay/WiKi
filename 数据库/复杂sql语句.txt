@@ -1,0 +1,24 @@
+update DeptTable 
+set users = temp.users
+from (select detpID,
+					STUFF((
+							select ',' + userName 
+							from UserTable
+							where u.detpID=detpID 
+							for xml path('')
+						),1,1,'') users
+	from UserTable u
+	group by detpID) temp
+where DeptTable.deptID = temp.detpID;
+
+update [工商户信息表]
+set [工商户信息表].[关联表具] = temp.关联表具
+from (select [用气地址],STUFF((
+							select ','+cast([表钢号] as NVARCHAR)
+							from [工商户表具信息表]
+							where userInfoTable.[用气地址] = [用气地址]
+							for xml path('')
+							),1,1,'') as [关联表具]
+	from [工商户表具信息表] userInfoTable
+	group by [用气地址]) temp
+where [工商户信息表].[用气地址] = temp.用气地址;

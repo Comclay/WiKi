@@ -1,0 +1,19 @@
+存储空间的管理器：
+	a，获取手机内存(RAM，应用程序默认安装的位置)，外部存储空间的信息（sd等）
+		StatFs   : 这个类可以获取有关文件系统存储空间的所有信息
+
+		构造方法： StatFs(String path)    // 获取制定路径的信息
+		常用方法：	long getAvailableBlocksLong()  //  在该文件系统中有多少个块可以使用
+					long getAvailableBytes()       //  有多少个字节可使用
+					long getBlockCountLong()	   //  在当前文件系统中总共有多少个块
+					long getBlockSizeLong()		   //  每个块的字节数
+					long getFreeBlocksLong()		// 所有的空闲的块，包括那些不提供给用户使用的块
+					long getFreeBytes()				// 总的空闲的字节数，包括保留的空间（即不提供给正常应用使用的控件）
+					long getTotalBytes()			// 总的字节数
+
+				用Environment 类获取路径  ， 
+				另外Formatter.Formatter.formatFileSize(context, number) 可格式话对应字节空间成合适的单为表示
+				可根据上面的方法计算出空间的总的大小和剩余可用空间的大小。
+
+	b，获取手机运行内存的信息（RAM）,相当于电脑的内存
+	

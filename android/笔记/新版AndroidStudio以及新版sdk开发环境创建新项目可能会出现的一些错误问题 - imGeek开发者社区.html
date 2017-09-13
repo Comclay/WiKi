@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://www.imgeek.org/article/825307449 -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+<meta name="renderer" content="webkit">
+<title>新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区</title>
+<meta name="keywords" content="新版,androidstudio,sdk,开发,环境,创建,新项目,可能,出现,一些,错误,问题">
+<meta name="description" content="新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - 首先说下我这边开发的环境：
+AndroidStudio version：1.4.1
+jdk version：1.7.0
+SDKTools version：24.4.x
+Build-tools version：23.0.1
+Compile SDK versi...">
+<meta property="qc:admins" content="546577777761575536727">
+<meta property="wb:webmaster" content="b121ed913b2f8747">
+<!--<base href="http://www.imgeek.org/">--><base href="."><!--[if IE]></base><![endif]-->
+<link href="http://www.imgeek.org/static/css/default/img/favicon.ico?v=20151103" rel="shortcut icon" type="image/x-icon">
+
+<link rel="stylesheet" type="text/css" href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/animate.css">
+<link rel="stylesheet" type="text/css" href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/icon.css">
+
+<link href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/common.css" rel="stylesheet" type="text/css">
+<link href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/link.css" rel="stylesheet" type="text/css">
+<link href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/extend.css" rel="stylesheet" type="text/css">
+<link href="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/style.css" rel="stylesheet" type="text/css">
+
+
+<script charset="utf-8" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/s.js"></script><script charset="utf-8" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/v.js"></script><script charset="utf-8" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/v(1).js"></script><script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/hm.js"></script><script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/hm(1).js"></script><script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/hm(2).js"></script><script type="text/javascript" async="" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/vds.js"></script><script type="text/javascript">
+	var _A8D32E7565464730EB4BDF3F82267C92="";
+	var G_POST_HASH=_A8D32E7565464730EB4BDF3F82267C92;
+	var G_INDEX_SCRIPT = "";
+	var G_SITE_NAME = "imGeek开发者社区";
+	var G_BASE_URL = "http://www.imgeek.org";
+	var G_STATIC_URL = "http://www.imgeek.org/static";
+	var G_UPLOAD_URL = "http://www.imgeek.org/uploads";
+	var G_USER_ID = "";
+	var G_USER_NAME = "";
+	var G_UPLOAD_ENABLE = "N";
+	var G_UNREAD_NOTIFICATION = 0;
+	var G_NOTIFICATION_INTERVAL = 60000;
+	var G_CAN_CREATE_TOPIC = "";
+	var G_ADVANCED_EDITOR_ENABLE = "Y";
+    var G_TOPICS_LIMIT = 5;
+
+	</script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/jquery.2.js" type="text/javascript"></script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/jquery.form.js" type="text/javascript"></script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/plug-in_module.js" type="text/javascript"></script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/aws.js" type="text/javascript"></script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/aw_template.js" type="text/javascript"></script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/app.js" type="text/javascript"></script>
+<script type="text/javascript" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/compatibility.js"></script>
+<script type="text/javascript" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/owl.carousel.js"></script>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="http://www.imgeek.org/static/js/respond.js"></script>
+<![endif]-->
+<style type="text/css">.fancybox-margin{margin-right:17px;}</style><script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/easemob.utils.js"></script><style>html #hm_t_undefined .hm-t-go-top {position:fixed;right:2px;bottom:2px;z-index:99998;cursor:pointer;width:40px;height:37px!important;text-align:center;white-space:normal;font-size:14px;line-height:17px;padding-top:3px;color:#fff;background:#404040;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAAXCAYAAABH92JbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMjgwMTE3NDA3MjA2ODExODA4M0UyNDA4ODdDRTZBQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBQjc5RkRFNkI5ODMxMUUzQkZGNDhENEJFQjM2OTcyRiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBQjc5RkRFNUI5ODMxMUUzQkZGNDhENEJFQjM2OTcyRiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDI4MDExNzQwNzIwNjgxMTgwODNFMjQwODg3Q0U2QUIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMTgwODNFMjQwODg3Q0U2QUIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5HPYM5AAACC0lEQVR42uyZTSgEYRjH90NoqaVcpDblvKW2XOSkNh8H5Yac9sBBDqQokiJKSMpNTi5OPo6Ktsgu67JcUHIXWfK1u3b8Xx6Zxuzu+64dM83uv34zNfu8b8/8Z+d5P8YqSZLFJNLsRmyWvIRMKgVD4AhEwA3YAV0pzGwEqyAEwmAddIICHe7FqhnsdQM14FxKLj+ooFiGE2ykiD8GVbJ4I1ELAnTmasMODnAhpVcIFIMicMgRH6Z4IxnUAh4pP3Zu5TVpUOLXDJgWiB8wkEF9IK7IL07X05oUFLjpZ4JXQQOYYwfzafJcoDjVPqw43KE4lWtUTF+AQ8eBqQSsgTaO2E0apJ7URrdCDZOM62hQJfBzGmShOD+1+2XSiYaJ7utkkBsEgEewnYfauZUmzWmU6DuY0sEgLzgArgzbu6i992cu/1WclqXsa1iHIt0DYlnKP0b9fRZu5pWdZs7dWXqa7B80+s//oF5aMSjflGqBPq5BQnFtVv4UmGHjIPEH96PAZ6C5kVMwf6daPzbFKnqCqvx9Bk/yFjSBFTMvcL+1DerAmUA/p9Rm1+y7AHJdgnqwx9EHm1s0gKtc2CpR6gE00/ZHMm3RKxbJlf0kNb2BDrCk8hsbDdvBay5tuiUTGxL7waTs2iLw0YTR9BLZQRwDUVqwjuTS9q3VRB8C1OQUnM6UqdXX/IcADn0IMADs2AqDOPSutQAAAABJRU5ErkJggg==) no-repeat -42px center #666;*background-image:url(http://ecma.bdimg.com/holmes/t-popup-icons-png8.png);_position:absolute;_top:expression(eval(document.documentElement.scrollTop+(document.documentElement.clientHeight||document.body.clientHeight)-this.offsetHeight-2));}</style></head>
+<body><noscript unselectable="on" id="noscript">
+    &lt;div class="aw-404 aw-404-wrap container"&gt;
+        &lt;img src="http://www.imgeek.org/static/common/no-js.jpg"&gt;
+        &lt;p&gt;你的浏览器禁用了JavaScript, 请开启后刷新浏览器获得更好的体验!&lt;/p&gt;
+    &lt;/div&gt;
+</noscript>
+
+	<div class="aw-top-menu-wrap">
+		<div class="container">
+			<!-- logo -->
+			<div class="aw-logo hidden-xs">
+				<a href="http://www.imgeek.org/"></a>
+			</div>
+			<!-- end logo -->
+			<!-- 搜索框 -->
+			<div class="aw-search-box  hidden-xs hidden-sm">
+				<form class="navbar-search" action="http://www.imgeek.org/search/" id="global_search_form" method="post">
+					<input class="form-control search-query" type="text" placeholder="搜索问题、话题或人" autocomplete="off" name="q" id="aw-search-query">
+					<span title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i class="icon icon-search"></i></span>
+					<div class="aw-dropdown">
+						<div class="mod-body">
+							<p class="title">输入关键字进行搜索</p>
+							<ul class="aw-dropdown-list hide"></ul>
+							<p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a></p>
+						</div>
+						<div class="mod-footer">
+							<a href="http://www.imgeek.org/publish" onclick="$(&#39;#header_publish&#39;).click();" class="pull-right btn btn-mini btn-success publish">发起问题</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- end 搜索框 -->
+			<!-- 导航 -->
+			<div class="aw-top-nav navbar">
+				<div class="navbar-header">
+				  <button class="navbar-toggle pull-left">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				</div>
+				<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+				  <ul class="nav navbar-nav">
+										<!--li><a href="http://www.imgeek.org/" class=""><i class="icon icon-list"></i> 发现</a></li-->
+
+                    <li><a href="http://www.imgeek.org/question/" class=""><i class="icon icon-mytopic"></i> 问题</a></li>
+
+                    <li class="hint-new"><a href="http://www.imgeek.org/activity/"><i class="icon icon-activity"></i> 活动</a></li>
+                    
+                    <li class="hint-new"><a href="http://www.imgeek.org/page/code"><i class="icon icon-code"></i> 代码</a></li>
+                    
+                    <li><a href="http://www.imgeek.org/article/" class="active"><i class="icon icon-draft"></i> 文章</a></li>
+
+                    <li><a href="http://www.imgeek.org/help/"><i class="icon icon-bulb"></i> 帮助</a></li>
+                    
+					                    
+					<li>
+						<a style="font-weight:bold;">· · ·</a>
+						<div class="dropdown-list pull-right">
+							<ul id="extensions-nav-list">
+                                <li><a href="http://www.imgeek.org/topic/"><i class="icon icon-topic"></i> 话题</a></li>
+                                <li><a href="http://www.imgeek.org/video/"><i class="icon icon-video"></i> 视频</a></li>
+                                <!--
+																                                -->
+							</ul>
+						</div>
+					</li>
+				  </ul>
+				</nav>
+			</div>
+			<!-- end 导航 -->
+			<!-- 用户栏 -->
+			<div class="aw-user-nav">
+				<!-- 登陆&注册栏 -->
+									<a class="login btn btn-normal btn-primary" href="http://www.imgeek.org/login/">登录</a>
+					<a class="register btn btn-normal btn-success" href="http://www.imgeek.org/account/register/">注册</a>								<!-- end 登陆&注册栏 -->
+			</div>
+			<!-- end 用户栏 -->
+			<!-- 发起 -->
+						<!-- end 发起 -->
+		</div>
+	</div>
+        <div class="reward-carousel">
+        <div class="container">
+            <div class="owl-carousel owl-loaded owl-drag">
+                                                                                                    
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                
+                                                                                                                                                                
+                                                                                
+                                                                                                                        
+                                                                                                                        
+                                                                                                                                                                
+                                                <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-3605px, 0px, 0px); transition: 0.25s; width: 10300px;"><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/%E6%96%B0%E7%BD%91%E5%90%8D" target="_blank">新网名</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/hxshenchong" target="_blank">hxshenchong</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5898?item_id=10491&answer_id=10491#!answer_10491" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/%E7%8E%8B%E5%BA%86%E4%BC%9F" target="_blank">王庆伟</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307634" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307632" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/ted.zl" target="_blank">ted.zl</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307632" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/3663?item_id=10422&answer_id=10422#!answer_10422" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/hui" target="_blank">hui</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5944?item_id=10554&answer_id=10554#!answer_10554" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/AlwaysYang1992" target="_blank">AlwaysYang1992</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5944?item_id=10552&answer_id=10552#!answer_10552" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item active" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/helloworld" target="_blank">helloworld</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5836?item_id=10543&answer_id=10543#!answer_10543" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item active" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/itboy" target="_blank">itboy</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/helloworld" target="_blank">helloworld</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5836?item_id=10543&answer_id=10543#!answer_10543" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏16元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/wangxin_007" target="_blank">wangxin_007</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/zhuhy" target="_blank">zhuhy</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307635" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/%E6%96%B0%E7%BD%91%E5%90%8D" target="_blank">新网名</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/hxshenchong" target="_blank">hxshenchong</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5898?item_id=10491&answer_id=10491#!answer_10491" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/%E7%8E%8B%E5%BA%86%E4%BC%9F" target="_blank">王庆伟</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307634" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307632" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/ted.zl" target="_blank">ted.zl</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307632" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/lala2231" target="_blank">lala2231</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/3663?item_id=10422&answer_id=10422#!answer_10422" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/hui" target="_blank">hui</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5944?item_id=10554&answer_id=10554#!answer_10554" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/beyond" target="_blank">beyond</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/AlwaysYang1992" target="_blank">AlwaysYang1992</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5944?item_id=10552&answer_id=10552#!answer_10552" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/hblzg123" target="_blank">hblzg123</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/helloworld" target="_blank">helloworld</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5836?item_id=10543&answer_id=10543#!answer_10543" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏4元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/itboy" target="_blank">itboy</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/helloworld" target="_blank">helloworld</a>
+                            的
+                            <span><a href="http://www.imgeek.org/question/5836?item_id=10543&answer_id=10543#!answer_10543" target="_blank">问题回复</a></span>
+                            很有用，
+                            <span class="amount">赏16元</span>
+                        </div></div><div class="owl-item cloned" style="width: 505px; margin-right: 10px;"><div class="item">
+                            <a href="http://www.imgeek.org/people/wangxin_007" target="_blank">wangxin_007</a>
+                            觉得
+                            <a href="http://www.imgeek.org/people/zhuhy" target="_blank">zhuhy</a>
+                            写的
+                            <span><a href="http://www.imgeek.org/article/825307635" target="_blank">文章</a></span>
+                            非常赞，
+                            <span class="amount">赏8元</span>
+                        </div></div></div></div><div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots"><div class="owl-dot"><span></span></div><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div>
+        </div>
+    </div>
+    	        <!--div class="banner" style="text-align:center;margin-top:20px;margin-bottom:-10px;">
+        <a href="http://www.imgeek.org/activity/2" target="_blank"><img style="border-radius:5px;" src="http://www.imgeek.org/static/images/banner/igeek4.jpg" alt="iGeek Camp"></a>
+    </div-->
+    
+
+<div class="aw-container-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content aw-article-content">
+                    <div class="aw-mod aw-topic-bar" id="question_topic_editor" data-type="article" data-id="825307449">
+                        <div class="tag-bar clearfix">
+                                                                                    <span class="topic-tag" data-id="23133">
+                                <a class="text" href="http://www.imgeek.org/topic/AndroidStudio">AndroidStudio</a>
+                            </span>
+                                                        
+                                                    </div>
+                    </div>
+                    <div class="aw-mod aw-question-detail">
+                        <div class="mod-head">
+                            <h1>
+                                新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题                            </h1>
+
+                                                    </div>
+                        <div class="mod-body">
+                            <div class="content markitup-box">
+                                首先说下我这边开发的环境：<br>
+AndroidStudio version：1.4.1<br>
+jdk version：1.7.0<br>
+SDKTools version：24.4.x<br>
+Build-tools version：23.0.1<br>
+Compile SDK version：API 22 （5.1）<br>
+Minimum SDK version：API 15（4.0.3）<br>
+Gradle version：2.4<br>
+<br>
+连接地址：<br>
+AndroidStudio等工具地址：<br>
+Android官网：<a href="http://developer.android.com/" rel="nofollow" target="_blank">http://developer.android.com/</a><br>
+国内收集： <a href="http://www.androiddevtools.cn/" rel="nofollow" target="_blank">http://www.androiddevtools.cn/</a><br>
+gradle v2.4下载（as有时自动下载不成功，所以要自己下载）：<a href="https://downloads.gradle.org/distributions/gradle-2.4-all.zip" rel="nofollow" target="_blank">https://downloads.gradle.org/d ... l.zip</a><br>
+关于gradle首次创建项目卡住的问题可以看下这篇文章<a href="http://melove.net/lzan13/develops/android-develop/androidstudio-gradle-down-error-915.html" rel="nofollow" target="_blank">AndroidStudio 新建及clone项目关于gradle出现的问题</a>"<br>
+<br>
+创建项目<br>
+这里使用AndroidStudio创建一个空的项目就OK了，<br>
+打开AndroidStudio 点击Start a new Android Studio project创建新项目<br>
+<br>
+当创建成功后发现会出现了一些问题<pre>问题一<br>
+Error:A problem occurred configuring project ':app'.<br>
+&gt; Could not download junit.jar (junit:junit:4.12)<br>
+   &gt; Could not get resource 'https://jcenter.bintray.com/junit/junit/4.12/junit-4.12.jar'.<br>
+      &gt; Could not GET 'https://jcenter.bintray.com/junit/junit/4.12/junit-4.12.jar'.<br>
+         &gt; peer not authenticated <br>
+Error:A problem occurred configuring project ':app'.<br>
+&gt; Could not download hamcrest-core.jar (org.hamcrest:hamcrest-core:1.3): No cached version available for offline mode</pre><br>
+这个是因为最新的创建项目会使用junit库来进行代码测试，在下载这个库的内容的时候发现他引用了hamcrest这个框架，不过国内下载这个框架的这个接啊日报hamcrest-core.jar不成功，所以会报这个错误，可以把build.gradle里引用的junit给删除或注释<pre>问题二<br>
+D:\develop\android\workspace\studio\EaseUICustomer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\res\values-v23\values-v23.xml<br>
+Error:(2) Error retrieving parent for item: No resource found that matches the given name 'android:TextAppearance.Material.Widget.Button.Inverse'.<br>
+Error:(2) Error retrieving parent for item: No resource found that matches the given name 'android:Widget.Material.Button.Colored'.<br>
+Error:Execution failed for task ':app:processDebugResources'.<br>
+&gt; com.android.ide.common.process.ProcessException: org.gradle.process.internal.ExecException: Process 'command 'D:\develop\android\android_sdk\build-tools\build-tools-23.0.1\aapt.exe'' finished with non-zero exit value 1</pre><br>
+这个是因为创建项目默认使用appcompat-v7包23.0.1版本，这个版本好像有问题，手动把这个版本号改下就ok了，改成22.+然后同步 就ok<br>
+&nbsp;<br>
+同步发表到个人博客：<a href="http://blog.melove.net/" rel="nofollow" target="_blank">http://blog.melove.net</a><br>
+文章地址：<a href="http://blog.melove.net/lzan13/develops/android-develop/androidstudio-sdk-project-error-953.html" rel="nofollow" target="_blank">新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题</a>
+                                
+                                                            </div>
+                            <div class="meta clearfix">
+                                <!--div class="aw-article-vote pull-left disabled">
+                                    <a href="javascript:;" class="agree" onclick="AWS.User.article_vote($(this), 825307449, 1);"><i class="icon icon-agree"></i> <b>1</b></a>
+                                                                    </div-->
+                                <!-- Haozki: 赞赏入口 -->
+                                <span class="operate">
+                                                                    </span>
+                                <!-- end 赞赏入口 -->
+                                <span class="pull-right  more-operate">
+                                    
+                                    
+                                    <a class="text-color-999 dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon icon-share"></i> 分享                                    </a>
+                                    <div aria-labelledby="dropdownMenu" role="menu" class="aw-dropdown shareout pull-right">
+                                        <ul class="aw-dropdown-list">
+                                            <li><a onclick="AWS.User.share_out({webid: &#39;tsina&#39;, content: $(this).parents(&#39;.aw-question-detail&#39;).find(&#39;.markitup-box&#39;)});"><i class="icon icon-weibo"></i> 微博</a></li>
+                                            <li><a onclick="AWS.User.share_out({webid: &#39;qzone&#39;, content: $(this).parents(&#39;.aw-question-detail&#39;)});"><i class="icon icon-qzone"></i> QZONE</a></li>
+                                            <li><a onclick="AWS.User.share_out({webid: &#39;weixin&#39;, content: $(this).parents(&#39;.aw-question-detail&#39;)});"><i class="icon icon-wechat"></i> 微信</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <em class="text-color-999">2015-11-22 09:40</em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mod-footer">
+                                                        <div class="aw-article-voter">
+                                                                <a href="http://www.imgeek.org/people/fat1" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="fat1"><img alt="fat1" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/91_avatar_mid.jpg"></a>
+                                                                <!--<a class="more-voters">...</a>-->
+                            </div>
+                                                    </div>
+                    </div>
+
+                    <!-- 文章评论 -->
+                    <div class="aw-mod">
+                        <div class="mod-head common-head">
+                            <h2>0 个评论</h2>
+                        </div>
+
+                        <div class="mod-body aw-feed-list">
+                                                    </div>
+
+                        
+                                            </div>
+                    <!-- end 文章评论 -->
+
+                    <!-- 回复编辑器 -->
+                    <div class="aw-mod aw-article-replay-box">
+                        <a name="answer_form"></a>
+                                                <p align="center">要回复文章请先<a href="http://www.imgeek.org/login/">登录</a>或<a href="http://www.imgeek.org/account/register/">注册</a></p>
+                                            </div>
+                    <!-- end 回复编辑器 -->
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-sm hidden-xs">
+                    <!-- 发起人 -->
+                                        <div class="aw-mod user-detail">
+                        <div class="mod-head">
+                            <h3>发起人</h3>
+                        </div>
+                        <div class="mod-body">
+                            <dl>
+                                <dt class="pull-left aw-border-radius-5">
+                                    <a href="http://www.imgeek.org/people/lzan13"><img alt="lzan13" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/82_avatar_mid.jpg"></a>
+                                </dt>
+                                <dd class="pull-left">
+                                    <a class="aw-user-name" href="http://www.imgeek.org/people/lzan13" data-id="1282">lzan13</a>
+                                    
+                                                                        <p></p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="mod-footer clearfix">
+                                                        <div class="aw-topic-bar">
+                                <div class="topic-bar clearfix">
+                                    <span class="pull-left text-color-999">
+                                        擅长话题 : &nbsp;
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="http://www.imgeek.org/topic/%E7%8E%AF%E4%BF%A1_Android" class="text" data-id="98">环信_Android</a>
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="http://www.imgeek.org/topic/%E7%8E%AF%E4%BF%A1%E6%8A%80%E6%9C%AF%E6%94%AF%E6%8C%81" class="text" data-id="49">环信技术支持</a>
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="http://www.imgeek.org/topic/Android" class="text" data-id="175">Android</a>
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="http://www.imgeek.org/topic/imgeek" class="text" data-id="115">imgeek</a>
+                                    </span>
+                                                                    </div>
+                            </div>
+                                                    </div>
+                    </div>
+                                        <!-- end 发起人 -->
+
+                    
+                                        <!-- 相关问题 -->
+                    <div class="aw-mod aw-text-align-justify question-related-list">
+                        <div class="mod-head">
+                            <h3>相关问题</h3>
+                        </div>
+                        <div class="mod-body font-size-12">
+                            <ul>
+                                                                <li><a href="http://www.imgeek.org/question/3276">关于环信聊天导出记录遗漏的问题</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3712">在登录的时候，出现连接服务器超时，神马情况？</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3272">环信聊天记录问题</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3831">ios从服务器拿到历史记录导入demo的数据库出现如些问题</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/5009">环信用户数据导入问题</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3357">iOS最新版的sdk集成进去报的错，换成cocoaPods能正常运行（没有语音功能），怎么破？</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/4596">集成环信UI 时按照视频来总是出现错误</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3361">android 环信地图问题</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3243">新版来袭了</a></li>
+                                                                <li><a href="http://www.imgeek.org/question/3888">帮忙看一下问题 </a></li>
+                                                                <li><a href="http://www.imgeek.org/question/4014">关注环信推送配置问题</a></li>
+                                                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 相关问题 -->
+                                    </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reward-box">
+    <div class="entry">
+        <h1 class="title">知识价值的认可，源自您的赞赏</h1>
+        <div class="qrcode"></div>
+        <p class="tips">扫描二维码，你的支付将由imGeek代收后转给对方</p>
+        <a class="close" href="javascript:;">×</a>
+    </div>
+    <div class="success" style="display:none;">
+        <h1 class="title">您已成功支付<span class="amount"></span>元</h1>
+        <div><i class="icon icon-followed"></i></div>
+        <p class="tips">感谢您的赞赏</p>
+    </div>
+</div>
+
+<div id="backdrop"></div>
+
+<script type="text/javascript">
+    var ANSWER_EDIT_TIME = 30;
+
+    $(document).ready(function () {
+        if ($('.aw-article-vote.disabled').length)
+        {
+            $('.aw-article-vote.disabled a').attr('onclick', '');
+        }
+
+        AWS.at_user_lists('#wmd-input');
+
+        AWS.Init.init_article_comment_box($('.aw-article-comment'));
+    });
+</script>
+
+<script type="text/javascript" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/jquery.qrcode.js"></script>
+<script type="text/javascript">
+$(function(){
+    function makerQrcode(from_uid,to_uid,post_type,post_id){
+        $("#reward-box .qrcode").qrcode({
+            render: "canvas", //table方式
+            width: 200, //宽度
+            height: 200, //高度
+            text: 'http://www.imgeek.org/reward/?from_uid='+from_uid+'&to_uid='+to_uid+'&post_type='+post_type+'&post_id='+post_id, //此处必须写死为主域名不能使用：G_BASE_URL + '/reward/
+            background: "#ffffff",//背景颜色
+            foreground: "#0A96FB" //前景颜色
+        });
+    }
+    $('.do-reward').click(function(){
+        var from_uid = ,
+            to_uid = $(this).data('to_uid'),
+            post_type = $(this).data('post_type'),
+            post_id = $(this).data('post_id');
+
+        makerQrcode(from_uid,to_uid,post_type,post_id);
+        $('#backdrop').fadeIn();
+        $('#reward-box').fadeIn();
+
+        // 开始监听订单状态
+        var traceStatus = function(){
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: G_BASE_URL + '/reward/order/track/',
+                timeout: 60000,
+                data: {
+                    time: 30,
+                    from_uid: from_uid,
+                    to_uid: to_uid,
+                    post_type: post_type,
+                    post_id: post_id,
+                    datetime: parseInt(new Date().getTime()/1000)
+                },
+                success:function(data,textStatus){
+                    if(data['err']){
+                        traceStatus();
+                    }else{
+                        $('#reward-box .entry').fadeOut(function(){
+                            $("#reward-box .qrcode").html('');
+                            $('#reward-box .success .amount').html(data['rsm']['amount']/100);
+                            $('#reward-box .success').fadeIn().delay(2000).fadeOut(function(){
+                                $('#backdrop').fadeOut();
+                                $('#reward-box').fadeOut(function(){
+                                    $('#reward-box .entry').show();
+                                });
+                            });
+                        });
+                    }
+                },
+                error:function(XMLHttpRequest,textStatus,errorThrown){
+                    if(textStatus=="timeout"){
+                        traceStatus();
+                    }
+                }
+            });
+        };
+        traceStatus();
+        return;
+    });
+    $('#reward-box .close').click(function(){
+        $('#backdrop').fadeOut();
+        $('#reward-box').fadeOut(function(){
+            $("#reward-box .qrcode").html('');
+        });
+        return;
+    });
+});
+</script>
+
+<style>
+.aw-footer {
+    background-color: #332e36;
+    color: #eee;
+    margin: 10px 0;
+    padding-bottom: 20px;
+}
+.footer-nav ul li a {
+    color: #888;
+    padding: 0 40px;
+}
+</style>
+<div class="aw-footer-wrap">
+    <div class="aw-footer">
+    <div class="container">
+        <div class="row" style="padding-top: 20px;">
+            <div class="col-sm-5">
+                <img src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/imgeek.png" class="pull-right" style="width:50px;">
+            </div>
+            <div class="col-sm-7" style="font-size: 15px;">
+                <div class="pull-left">
+                    <p style="padding:10px 0;">一个开放、互助、协作、创意的社区</p>
+                </div>
+            </div>
+        </div>
+        <div class="row footer-nav" style="padding: 30px; font-size:14px;">
+            <ul class="list-inline">
+                <li><a href="http://www.imgeek.org/page/about">关于imGeek</a></li>
+                <li><a href="http://www.imgeek.org/page/zhuanzhi">关于专职工程师值守</a></li>
+                <li><a href="http://www.imgeek.org/people">社区威望排名</a></li>
+                <li><a href="http://www.imgeek.org/page/sponsors">赞助商</a></li>
+                <li><a href="http://www.imgeek.org/page/friends">友情链接</a></li>
+            </ul>
+        </div>
+    </div>
+        
+			</div>
+    <!--div class="aw-footer">
+		Copyright © 2016, All Rights Reserved</span>
+
+		<span class="hidden-xs">Powered By <a href="http://www.wecenter.com/?copyright" target="blank">WeCenter 3.1.6</a></span>
+
+			</div-->
+</div>
+
+<a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});" style="display: none;"><i class="icon icon-up"></i></a>
+
+<!-- 移动客服入口 -->
+<div id="kefu-entry">
+    <a href="javascript:;" onclick="easemobIM(&#39;技术&#39;)"><i class="icon icon-comment"></i> 技术咨询</a>
+</div>
+
+<!-- growingio -->
+<script type="text/javascript">
+var _vds = _vds || [];(function(){ _vds.push(['setAccountId', '8bb5da75505521d9fa9a3dea82f4e2e2']); (function() {var vds = document.createElement('script'); vds.type='text/javascript'; vds.async = true;vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(vds, s);})();})();
+</script>
+
+<!-- ad7 -->
+<script type="text/javascript" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/0155e6ac7eadf10d223a45a8e2865b3d.js"></script> 
+
+
+<!-- 在imgeek.org单独购买百度推广后获取的统计代码-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fd760feeda429abb36a65ca6febff23b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- 与easemob.com在一起的统计代码，异步代码 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?820fabf598fd1f13530eead9aaf4a631";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- easemob.com的代码，可以统计community.easemob.com, support.easemob.com -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?3e5b3453fdcff1e4dec124ea22f1e189";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- DO NOT REMOVE -->
+<div id="aw-ajax-box" class="aw-ajax-box"></div>
+
+<div style="display:none;" id="__crond"><img src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/1456412506" width="1" height="1"></div>
+
+<!-- Escape time: 0.21203398704529 --><!-- / DO NOT REMOVE -->
+
+<script type="text/javascript">
+// 赞赏轮播数据
+var owl = $('.reward-carousel .owl-carousel');
+owl.owlCarousel({
+    items: 2,
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    //autoplaySpeed: 500,
+    autoplayHoverPause: true,
+    animateIn: 'bounceIn',
+    animateOut: 'bounceOut',
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items: 1
+        },
+        992:{
+            items: 2
+        }
+    }
+});
+</script>
+<script src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/easemob.js" async="async"></script>
+
+
+<div style="display: none; cursor: move; z-index: 16777270; position: fixed; bottom: 10px; right: 10px; border: none; width: 400px; height: 500px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px; border-radius: 4px; background: url(http://kefu.easemob.com/webim/static/img/drag.png) no-repeat;"></div><iframe id="EasemobIframe1456412499412" name="1456412499412" frameborder="0" src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/im.html" style="z-index: 16777269; overflow: hidden; position: fixed; bottom: 10px; right: -5px; border: none; width: 12px; height: 12px; display: block; transition: all 0.01s;"></iframe><div id="ad7_ad_div" style="display: none; position: absolute;"><img src="./新版AndroidStudio以及新版sdk开发环境创建新项目可能会出现的一些错误问题 - imGeek开发者社区_files/saved_resource"></div><div id="hm_t_undefined" class="hm-t-container"><div class="hm-t-go-top" style="display: block;"></div></div></body></html>

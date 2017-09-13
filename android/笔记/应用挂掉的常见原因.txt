@@ -1,0 +1,9 @@
+7，窗体泄漏，内存泄漏：window.wiget.WindowLeaked
+
+	产生原因：
+	我们知道Android的每一个Activity都有个WindowManager窗体管理器，
+	同样，构建在某个Activity之上的对话框、PopupWindow也有相应的WindowManager窗体管理器。
+	因为对话框、PopupWindown不能脱离Activity而单独存在着，所以当某个Dialog或者
+	某个PopupWindow正在显示的时候我们去finish()了承载该Dialog(或PopupWindow)的Activity时，
+	就会抛Window Leaked异常了，因为这个Dialog(或PopupWindow)的WindowManager已经没有谁可以附属了，
+	所以它的窗体管理器已经泄漏了

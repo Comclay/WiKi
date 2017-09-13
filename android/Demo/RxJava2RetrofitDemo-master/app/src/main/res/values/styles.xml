@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+    </style>
+
+    <style name="AppTheme.FadeInAnimation.NoActionBar" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/anim_splash</item>
+    </style>
+
+    <style name="anim_splash">
+        <item name="android:windowEnterAnimation">@anim/anim_fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolBarStyle" parent="">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/col_theme_0092</item>
+        <item name="colorPrimaryDark">@color/col_theme_0092</item>
+        <item name="colorAccent">@color/col_theme_0092</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:actionBarSize">46dp</item>
+        <item name="android:textColor">@color/sd_text_black_33</item>
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+
+    <style name="AppMain" parent="AppTheme">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme2" parent="BaseAppTheme">
+
+    </style>-->
+
+</resources>

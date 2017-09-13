@@ -1,0 +1,31 @@
+一般对话框：
+	警告对话框 AlertDialog:  一个可以有0到3个按钮, 一个单选框或复选框的列表的对话框.
+							警告对话框可以创建大多数的交互界面, 是推荐的类型.
+
+			AlertDialog的扩展：
+						1，要创建一个具有可选项的AlertDialog，使用setItems()方法
+						2，要创建一个带有多选列表或者单选列表的对话框， 
+								使用setMultiChoiceItems()和setSingleChoiceItems()方法。
+						3，如果你想自定义一个对话框，你可以使用布局元素来创造你的对话框的布局。
+								定义好布局后，将根View对象或者布局资源ID传给setContentView(View).
+						4，用inflater(int, groupView)加载一个xml的布局文件，再调用getView(view)显示
+
+　　进度对话框 ProgressDialog:  显示一个进度环或者一个进度条. 由于它是AlertDialog的扩展, 所以它也支持按钮.
+				默认为显示的是圆圈，如果想改成水平方向的进度条可以通过下面的方法设置进度条的样式
+				progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
+
+
+　　日期选择对话框 DatePickerDialog:  让用户选择一个日期.
+
+　　时间选择对话框 TimePickerDialog:  让用户选择一个时间.
+
+气泡窗体，弹出窗体   PopupWindow
+				// 加载xml的布局文件
+				View contentView = View.inflate(AppManagerActivity.this, R.layout.popup_item, null);
+				// -2表示包裹内容， -1表示填充窗体
+				popupWindow = new PopupWindow(contentView, -2, -2);
+				// 设置弹出窗体的显示位置
+				int[] location = new int[2]; // 分别存放x, y
+				view.getLocationInWindow(location); // 获取listView中点击条目在窗体中的位置
+				// 显示气泡窗体
+				popupWindow.showAtLocation(parent, Gravity.LEFT | Gravity.TOP, location[0], location[1]);

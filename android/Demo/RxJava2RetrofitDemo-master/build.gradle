@@ -1,0 +1,92 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 1
+
+ext {
+    versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
+    versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+
+    minSdkVersion = 16
+    targetSdkVersion = 23
+    compileSdkVersion = 24
+    buildToolsVersion = "25.0.3"
+
+    // App dependencies
+    supportLibraryVersion = '24.2.1'
+    junitVersion = '4.12'
+}
+
+public class BuildTimeListener implements TaskExecutionListener, BuildListener {
+    private Clock clock
+    private times = []
+
+    @Override
+    void beforeExecute(Task task) {
+        clock = new org.gradle.util.Clock()
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState taskState) {
+        def ms = clock.timeInMs
+        times.add([ms, task.path])
+
+        //task.project.logger.warn "${task.path} spend ${ms}ms"
+    }
+
+    @Override
+    void buildStarted(Gradle gradle) {
+
+    }
+
+    @Override
+    void settingsEvaluated(Settings settings) {
+
+    }
+
+    @Override
+    void projectsLoaded(Gradle gradle) {
+
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        println "Task spend time:"
+        for (time in times) {
+            if (time[0] >= 50) {
+                printf "%7sms  %s\n", time
+            }
+        }
+    }
+}
+
+project.gradle.addListener(new BuildTimeListener())

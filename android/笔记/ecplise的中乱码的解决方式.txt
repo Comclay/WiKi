@@ -1,0 +1,7 @@
+ecplise的中乱码的解决方式：
+
+整个工作空间出现乱码：
+	Windows ==》preference ==》General ==》workspace == Text file encoding
+	
+某个项目中出现乱码：
+	项目右键 ==》 properties ==》Resource ==》other ==》选择合适的编码格式

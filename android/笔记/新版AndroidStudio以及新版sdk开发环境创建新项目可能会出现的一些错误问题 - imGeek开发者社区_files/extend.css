@@ -1,0 +1,22 @@
+/* 社区赞赏 */
+.reward-overview .colunm {
+    padding: 20px;
+}
+.reward-overview .colunm .content {
+    padding: 15px;
+}
+.reward-overview .colunm h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.reward-overview .count .amount {
+    color: #57C642;
+    font-size: 30px;
+    margin-right: 5px;
+}
+.reward-overview .count .detail p {
+    margin-bottom: 24px;
+    color: #000;
+}
+
+

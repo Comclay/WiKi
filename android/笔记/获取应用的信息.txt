@@ -1,0 +1,57 @@
+获取所有的应用的信息：
+	PackageManager   ： 包管理器，获取应用程序信息
+		通过上下文菜单可获得PackageManager的实例
+
+		PackageManager packageManager = context.getPackageManager();
+
+		// 获取所有应用程序的安装包包信息
+		List<PackageInfo> packageInfos = packageManager.getInstalledPackages(0);		
+		// 获取每个应用程序所对应的详细信息
+		packageInfo.applicationInfo.loadLabel(packageManager); // 应用程序名称
+		packageInfo.packageName;   // 包名
+		packageInfo.applicationInfo.loadIcon(packageManager);   // 应用程序的图标
+
+		int flag = packageInfo.applicationInfo.flags;		// 应用程序的类型
+		flag & ApplicationInfo.FLAG_SYSTEM) == 0    // 系统应用
+
+		flag & ApplicationInfo.FLAG_EXTERNAL_STORAGE == 0   // 该应用存储在外部设备上
+
+获取所有可以启动的应用的信息：
+
+	PackageManager packageManager = context.getPackageManager();
+	Intent intent = new Intent();
+	intent.setAction("android.intent.action.VIEW");
+	intent.addCategory("android.intent.category.DEFAULT");
+	// 根据意图过滤器来获取所有可以启动的应用程序的集合
+	List<ResolveInfo> infos = pm.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
+
+
+	示例代码：
+	/**
+	 * 获取所有可以启动的应用程序的信息
+	 * 
+	 * @return
+	 */
+	private List<AppInfos> getAppInfos() {
+		List<AppInfos> list = new ArrayList<AppInfos>();
+
+		PackageManager packageManager = getPackageManager();
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.MAIN");
+		intent.addCategory("android.intent.category.LAUNCHER");
+		/**
+		 * Information that is returned from resolving an intent against an
+		 * IntentFilter. This partially corresponds to information collected
+		 * from the AndroidManifest.xml's <intent> tags.
+		 */
+		List<ResolveInfo> infos = packageManager.queryIntentActivities(intent, PackageManager.GET_INTENT_FILTERS);
+		for (ResolveInfo resolveInfo : infos) {
+			String packageName = resolveInfo.resolvePackageName;
+			Drawable icon = resolveInfo.loadIcon(packageManager); // 获取对应应用的图标】
+			String appName = (String) resolveInfo.loadLabel(packageManager); // 获取对应应用的标签
+
+			AppInfos appInfos = new AppInfos(appName, icon, packageName);
+			list.add(appInfos);
+		}
+		return list;
+	}

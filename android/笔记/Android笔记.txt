@@ -1,0 +1,65 @@
+android 笔记
+
+1，自android4.3以后provider中的属性
+	android：export属性默认是false，因此当我们自定义ContentProvider时，需要自己声明。否则报错。
+
+
+2，意图Intent
+	显示意图：必须制定激活的组件的完整包名和类名（应用程序是耦合在一起的）
+		一般激活自己应用程序的组件的时候采用显示意图
+	隐式意图：只需要制定要执行的动作和数据就可以（应用程序之间没有耦合）
+		一般在激活别人的应用程序时采用隐式意图，不需要关心对方的包名和类名
+
+断点下载：记录下载的进度
+
+3，广播接收者(BroadcastReceiver)
+	注意：不要在onReceive()方法中添加过多的逻辑或者进行任何的耗时操作，
+		因为在广播接收器中是不允许开启线程的，当onReceive()方法运行了较长
+		时间而没有结束时，程序就会报错。
+
+4，从jdk1.7版本之后，switch语句能够用String类型的字符串作为判断条件
+
+
+5，迭代开发，敏捷开发：开发一段代码就确认一段代码
+	代码解耦：解除耦合（两个方法的关联程度太强时，比如一个方法的执行必须要依赖于另一个方法传递过来的参数）
+		暴露一个借口，提供一个回调方法
+
+6，ListView优化
+	a，复用历史缓存的View对象contertView
+	b，减少item里面的控件的id查询次数
+	c，分批加载数据
+	d，分页加载数据
+
+	一般的优化原则：
+		时间换时间   ListView分批加载数据
+
+		时间换空间   文件的拷贝
+
+		空间换时间	 建立文件查询的索引
+
+		空间换空间   虚拟内存 ，ARMdisk
+	
+  
+7，窗体泄漏，内存泄漏：window.wiget.WindowLeaked
+
+	产生原因：
+	我们知道Android的每一个Activity都有个WindowManager窗体管理器，
+	同样，构建在某个Activity之上的对话框、PopupWindow也有相应的WindowManager窗体管理器。
+	因为对话框、PopupWindown不能脱离Activity而单独存在着，所以当某个Dialog或者
+	某个PopupWindow正在显示的时候我们去finish()了承载该Dialog(或PopupWindow)的Activity时，
+	就会抛Window Leaked异常了，因为这个Dialog(或PopupWindow)的WindowManager已经没有谁可以附属了，
+	所以它的窗体管理器已经泄漏了
+
+8，Animation动画要想执行必须要给对应的View添加背景，否则无效
+	背景设置为透明也算是有背景Color.TRANSPARENT
+
+9，锁屏的广播所对应的广播接收者不能够在Manifest文件中静态注册
+		只能够在代码中动态注册，否则无效
+
+
+
+
+10，PopupWindow : 弹出窗体，气泡窗体
+
+				
+					

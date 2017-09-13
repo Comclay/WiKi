@@ -1,0 +1,86 @@
+worker_processes  1;
+
+error_log  logs/error.log debug;
+
+events {
+    worker_connections  1024;
+}
+
+rtmp {
+
+	# 默认60s
+	timeout 30s;
+	
+	# ping超时时间，Default value for ping is 1 minute. Default ping timeout is 30 seconds
+	ping 3m;
+	ping_timeout 30s;
+	
+	#Allow publishing/playing from addresses specified or from all addresses. Allow/deny directives are checked in order of appearance.
+	#allow publish 127.0.0.1;
+	#deny publish all;
+	#allow play 192.168.0.0/24;
+	#deny play all;
+	
+    server {
+        listen 1935;
+
+		# 推流url: rtmp://localhost:1935/live/[流名称]
+        application live {
+            live on;
+			# 配置视频录制功能
+			# 参数：off,all,audio,video,keyframes
+			record all;
+			# record audio keyframes;
+			# 路径，context: rtmp, server, application, recorder
+			record_path temp/live;
+			# 文件命名 -%Y-%b-%d-%T.flv  [流名称]-1971-mon-1-00:00:00.flv
+			# record_suffix -%Y-%b-%d-%T.flv;
+			
+			#record_max_size 128K;
+			
+			#录制的间隔Restart recording after this number of (milli)seconds.
+			#record_interval 1s;
+			#record_append on; #两个命令配合使用才能最终录制成一个文件
+        }
+		
+		application hls {
+			live on;
+			hls on;  
+			# 每个切片存放的路径
+			hls_path temp/hls;  
+			# 每个切片保存8s的视频
+			hls_fragment 8s;  
+		}
+    }
+}
+
+http {
+    server {
+        listen      8080;
+		server_name  192.168.1.124;
+		
+        location / {
+            root www;
+        }
+		
+        location /stat {
+            rtmp_stat all;
+            rtmp_stat_stylesheet stat.xsl;
+        }
+
+        location /stat.xsl {
+            root www;
+        }
+		
+		location /hls {  
+           #server hls fragments  
+			types{  
+				application/vnd.apple.mpegurl m3u8;  
+				video/mp2t ts;  
+			}  
+			alias temp/hls;  
+			expires -1;  
+        }  
+
+    }
+}

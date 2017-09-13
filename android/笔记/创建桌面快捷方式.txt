@@ -1,0 +1,35 @@
+在系统应用程序Launcher2中有一个接收广播的InstallShortCut的创建快截图标的广播接受者
+
+	<receiver
+//        android:name="com.android.launcher2.InstallShortcutReceiver"
+//        android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
+//        <intent-filter>
+//            <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
+//        </intent-filter>
+//    </receiver>
+
+
+	因此我们想让应用程序创建出桌面快捷图标，只需要发送一个广播让其接收到就可以了
+
+	代码：
+	public void createShortCut(){
+		Intent intent = new Intent();  // 发送广播的意图
+		// 创建快捷方式的动作
+		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+		// 创建快捷方式还需要下面3个步骤
+		// 1, 快捷方式的图标
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+		// 2, 快捷方式的名称
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "手机卫士");
+		// 3, 点击快捷方式所要干的事情
+		Intent shortcut = new Intent();
+		shortcut.setAction("android.intent.action.MAIN");
+		shortcut.addCategory("android.intent.category.LAUNCHER");
+
+		// 如果启动的activity不是"com.itheima.mobilesafe.SplashActivity" ，即使卸载掉应用，快捷方式依然存在
+		shortcut.setClassName("com.itheima.mobilesafe", "com.itheima.mobilesafe.SplashActivity");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcut);
+
+		// 发送广播
+		sendBroadcast(intent);   // 发送一个广播
+	}
